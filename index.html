@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pre moju Vivku</title>
+
+<style>
+
+:root{
+--pink:#ff77c8;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:"Segoe UI",sans-serif;
+color:white;
+background:url("coffee.jpg") center/cover no-repeat fixed;
+overflow-x:hidden;
+animation:fadePage 1.2s ease forwards;
+opacity:0;
+}
+
+@keyframes fadePage{
+to{opacity:1}
+}
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:linear-gradient(rgba(15,10,20,0.55),rgba(15,10,20,0.85));
+z-index:1;
+}
+
+/* particles */
+
+#particles{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:0;
+}
+
+/* wrapper */
+
+.wrapper{
+position:relative;
+z-index:5;
+width:100%;
+padding:80px 8vw;
+}
+
+/* header */
+
+header{
+margin-bottom:70px;
+}
+
+header h1{
+font-size:28px;
+letter-spacing:4px;
+text-transform:uppercase;
+font-weight:900;
+}
+
+/* hero */
+
+.hero{
+display:grid;
+grid-template-columns:1.1fr 0.9fr;
+gap:80px;
+align-items:start;
+}
+
+/* text */
+
+.hero-title{
+font-size:56px;
+color:var(--pink);
+margin-bottom:25px;
+font-weight:900;
+}
+
+.hero-text{
+font-size:20px;
+line-height:1.7;
+color:rgba(255,255,255,0.9);
+}
+
+/* button */
+
+.btn{
+margin-top:30px;
+padding:15px 45px;
+background:var(--pink);
+border:none;
+border-radius:6px;
+color:white;
+font-weight:700;
+cursor:pointer;
+transition:.3s;
+box-shadow:0 15px 40px rgba(255,100,200,0.35);
+}
+
+.btn:hover{
+transform:translateY(-3px);
+box-shadow:0 25px 60px rgba(255,100,200,0.55);
+}
+
+/* preview photo */
+
+.photo-preview{
+cursor:pointer;
+max-width:520px;
+}
+
+.photo-preview img{
+width:100%;
+border-radius:16px;
+box-shadow:0 30px 80px rgba(0,0,0,0.8);
+transition:.4s;
+}
+
+.photo-preview:hover img{
+transform:scale(1.03);
+}
+
+/* gallery */
+.gallery-popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.95);
+  display:flex;
+  flex-wrap:wrap;            /* obrázky sa zalamujú na desktop */
+  justify-content:center;    /* centrovanie obrázkov */
+  align-items:center;
+  gap:15px;
+  padding:40px 5vw;
+  overflow-y:auto;           /* scroll pre mobile */
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .4s ease;
+  z-index:20;
+}
+
+.gallery-popup.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.gallery-popup img{
+  max-height:150px;          /* malé obrázky na PC */
+  width:auto;
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.7);
+  flex-shrink:0;
+  transition:.3s;
+  cursor:pointer;
+}
+
+.gallery-popup img:hover{
+  transform:scale(1.05);
+}
+
+/* mobile / menšie obrazovky */
+@media (max-width:900px){
+  .gallery-popup{
+    flex-direction:column;   /* obrázky pod sebou */
+    align-items:center;
+    gap:20px;
+    padding:20px;
+    overflow-y:auto;         /* scroll hore-dole */
+    overflow-x:hidden;
+  }
+
+  .gallery-popup img{
+    max-height:60vh;         /* väčšie obrázky na mobile */
+    width:auto;
+  }
+}
+
+.gallery-popup img:hover{
+transform:scale(1.05);
+}
+
+@keyframes photoAppear{
+from{
+opacity:0;
+transform:scale(.85);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
+}
+
+/* quote popup */
+
+.quote-popup{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(.85);
+background:rgba(20,20,35,.95);
+padding:55px;
+border-radius:14px;
+text-align:center;
+box-shadow:0 25px 80px rgba(0,0,0,.8);
+opacity:0;
+pointer-events:none;
+transition:.35s;
+z-index:25;
+max-width:500px;
+}
+
+.quote-popup.active{
+opacity:1;
+pointer-events:auto;
+transform:translate(-50%,-50%) scale(1);
+}
+
+.quote{
+font-size:28px;
+margin-bottom:30px;
+color:#ffd1f0;
+}
+
+.close{
+background:var(--pink);
+border:none;
+padding:10px 28px;
+border-radius:5px;
+color:white;
+cursor:pointer;
+}
+
+/* responsive */
+
+@media(max-width:900px){
+
+.hero{
+grid-template-columns:1fr;
+gap:50px;
+}
+
+.hero-title{
+font-size:40px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="wrapper">
+
+<header>
+<h1>Moja Vivka</h1>
+</header>
+
+<section class="hero">
+
+<div>
+
+<h2 class="hero-title">Pre moju Vivi ❤️</h2>
+
+<p class="hero-text">
+
+Ahoj Vivi. Dneska je to presne pol rok od kedy sa naše cesty konečne spojili.
+Trvalo to síce dlhšie ako som dúfal, no neľutujem to.
+
+<br><br>
+
+Od kedy som ťa prvý krát spoznal som vedel že to je niečo viac ako len "Crush".
+Vyžarovala z teba krása a láska ktorú som nevedel prehliadnuť.
+
+<br><br>
+
+Už od toho momentu som vedel že raz chcem mať takú ženu ako si TY.
+
+<br><br>
+
+Chcem sa ti poďakovať za to že si si ma vybrala a ospravedlniť za všetky chyby ktoré som počas nášho vzťahu urobil.
+
+<br><br>
+
+Nesmierne ťa MILUJEM a dúfam že si tento deň užiješ.
+
+</p>
+
+<button class="btn" onclick="showQuote()">Náhodný quote</button>
+
+</div>
+
+<div class="photo-preview" onclick="openGallery()">
+<img id="randomPhoto">
+</div>
+
+</section>
+
+</div>
+
+<!-- GALÉRIA -->
+<div class="gallery-popup" id="gallery">
+  <img src="photo1.jpg" alt="Foto 1">
+  <img src="photo2.jpg" alt="Foto 2">
+  <img src="photo3.jpg" alt="Foto 3">
+  <img src="photo4.jpg" alt="Foto 4">
+</div>
+
+<!-- LOVE COUNTER -->
+<div id="loveCounter" style="
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:rgba(15,10,20,0.8);
+  color:#ff77c8;
+  font-family:'Segoe UI', sans-serif;
+  text-align:center;
+  padding:12px 0;
+  font-size:18px;
+  z-index:50;
+  box-shadow:0 -3px 15px rgba(0,0,0,0.5);
+">
+  Loading love counter...
+</div>
+
+</div>
+
+<div class="quote-popup" id="quoteBox">
+
+<div class="quote" id="quoteText"></div>
+
+<button class="close" onclick="closeQuote()">Zavrieť</button>
+
+</div>
+
+<script>
+
+/* Otvorenie galérie */
+function openGallery(){
+  document.getElementById("gallery").classList.add("active");
+}
+
+/* Zatvorenie galérie po kliknutí na čierne pozadie */
+document.getElementById("gallery").addEventListener('click', function(e){
+  if(e.target === this){  // iba klik na pozadie, nie obrázok
+    this.classList.remove("active");
+  }
+});
+
+/* random preview photo */
+
+const photos=["photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg"]
+
+document.getElementById("randomPhoto").src=
+photos[Math.floor(Math.random()*photos.length)]
+
+/* gallery */
+
+function openGallery(){
+document.getElementById("gallery").classList.add("active")
+}
+
+document.getElementById("gallery").onclick=()=>{
+document.getElementById("gallery").classList.remove("active")
+}
+
+/* quotes */
+
+const quotes=[
+"Jebať Trnavu",
+"Pohode baba",
+"Pozdravuje ťa popolník Ivan",
+"Máš krásne oči",
+"Došli kondomy...",
+"UŽ SOM TI VRAVELA ŽE NEMOŽEM MLIEKO!",
+"Ja chcem psa :(",
+"OMG Isabely anoooo",
+"Prídeš dneska?",
+"Cigánka Katarína",
+"Vodka s redbulom"
+]
+
+function showQuote(){
+
+let q=quotes[Math.floor(Math.random()*quotes.length)]
+
+document.getElementById("quoteText").innerText=q
+document.getElementById("quoteBox").classList.add("active")
+
+}
+
+function closeQuote(){
+
+document.getElementById("quoteBox").classList.remove("active")
+
+}
+
+/* clean particles */
+
+const canvas=document.getElementById("particles")
+const ctx=canvas.getContext("2d")
+
+canvas.width=window.innerWidth
+canvas.height=window.innerHeight
+
+let p=[]
+
+for(let i=0;i<40;i++){
+p.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2,
+v:Math.random()*0.3
+})
+}
+
+function draw(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+ctx.fillStyle="rgba(255,255,255,0.25)"
+
+p.forEach(s=>{
+
+ctx.beginPath()
+ctx.arc(s.x,s.y,s.r,0,Math.PI*2)
+ctx.fill()
+
+s.y+=s.v
+
+if(s.y>canvas.height){
+s.y=0
+s.x=Math.random()*canvas.width
+}
+
+})
+
+requestAnimationFrame(draw)
+
+}
+
+draw()
+
+/* LOVE COUNTER */
+
+// nastav dátum začiatku vzťahu (rok, mesiac-1, deň)
+const startDate = new Date(2025, 8, 21, 0, 0, 0);
+
+function updateLoveCounter(){
+  const now = new Date();
+  let diff = now - startDate; // rozdiel v milisekundách
+
+  // prepočítaj na dni, hodiny, minúty, sekundy
+  const days = Math.floor(diff / (1000*60*60*24));
+  diff -= days * (1000*60*60*24);
+
+  const hours = Math.floor(diff / (1000*60*60));
+  diff -= hours * (1000*60*60);
+
+  const minutes = Math.floor(diff / (1000*60));
+  diff -= minutes * (1000*60);
+
+  const seconds = Math.floor(diff / 1000);
+
+  // vypíš do divu
+  document.getElementById("loveCounter").innerText =
+    `❤️ Sme spolu už ${days} dní, ${hours} hodín, ${minutes} minút a ${seconds} sekúnd ❤️`;
+}
+
+// aktualizuj každú sekundu
+setInterval(updateLoveCounter, 1000);
+updateLoveCounter(); // okamžitý update pri načítaní
+
+</script>
+
+</body>
+</html>
